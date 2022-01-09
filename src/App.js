@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 import Map from './components/Map';
 import Papa from 'papaparse';
 import { Header } from './components/Header';
-import jsonFile from './resources/locations-of-interest/august-2021/locations-of-interest.geojson';
 import Loader from './components/Loader';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
@@ -41,7 +40,7 @@ function App() {
     const fetchEvents = async() => {
       setLoading(true)
       
-      const res = await fetch(jsonFile)
+      const res = await fetch('https://raw.githubusercontent.com/minhealthnz/nz-covid-data/main/locations-of-interest/august-2021/locations-of-interest.geojson')
       const {features} = await res.json()
   
       setEventData(features)
