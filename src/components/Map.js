@@ -9,7 +9,6 @@ const Map = ({eventData, panTo}) => {
     const [close, setClose] = useState(false)
     
     const markers = eventData.map((ev, index) => {
-        
         return <LocationMarker key={index} 
                 lat={ev.geometry.coordinates[1]} 
                 lng={ev.geometry.coordinates[0]}
@@ -20,23 +19,17 @@ const Map = ({eventData, panTo}) => {
                         start: ev.properties.Start,
                         end: ev.properties.End
                     })
-
                     setClose(!close)
-                }
-                }
+                }}
                 color={panTo === undefined ?'red': '#fa6b37'}
-                
-        />
+                />
     })
 
     const onCloseClick = () => {
         setClose(!close)
     }
 
-    // console.log("panto:" , panTo)
-    // console.log("eventData:" , eventData.length)
     return (
-        
         <div className="map">
             {panTo.length !== undefined?
                 <GoogleMapReact
@@ -47,26 +40,24 @@ const Map = ({eventData, panTo}) => {
                 </GoogleMapReact>
                          
                 : <GoogleMapReact
-                bootstrapURLKeys={{key:'AIzaSyCBc6pukKhVCqFvdzsU8Mbm6P0mSOTQnjE'}}
-                center={{lat: panTo.geometry.coordinates[1], lng: panTo.geometry.coordinates[0]}}
-                zoom={12}> 
-    
-                {<LocationMarker 
-                lat={panTo.geometry.coordinates[1]}
-                lng={panTo.geometry.coordinates[0]}
-                onClick={()=>{
-                    setLocationInfo({
-                        location: panTo.properties.Event,
-                        address: panTo.properties.Location,
-                        start: panTo.properties.Start,
-                        end: panTo.properties.End
-                    })
-                    setClose(!close)
-                }}
-                color={'red'}/>}
+                    bootstrapURLKeys={{key:'AIzaSyCBc6pukKhVCqFvdzsU8Mbm6P0mSOTQnjE'}}
+                    center={{lat: panTo.geometry.coordinates[1], lng: panTo.geometry.coordinates[0]}}
+                    zoom={12}> 
+                    {<LocationMarker 
+                    lat={panTo.geometry.coordinates[1]}
+                    lng={panTo.geometry.coordinates[0]}
+                    onClick={()=>{
+                        setLocationInfo({
+                            location: panTo.properties.Event,
+                            address: panTo.properties.Location,
+                            start: panTo.properties.Start,
+                            end: panTo.properties.End
+                        })
+                        setClose(!close)
+                    }}
+                    color={'red'}/>}
                 </GoogleMapReact>
             }
-            
             {locationInfo && close ? <LocationInfo info={locationInfo} onCloseClick={onCloseClick}/> : null}
         </div>
     )
