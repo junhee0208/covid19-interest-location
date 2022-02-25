@@ -33,14 +33,14 @@ const Map = ({eventData, panTo}) => {
         <div className="map">
             {panTo.length !== undefined?
                 <GoogleMapReact
-                bootstrapURLKeys={{key:'AIzaSyCBc6pukKhVCqFvdzsU8Mbm6P0mSOTQnjE'}}
+                bootstrapURLKeys={{key:process.env.REACT_APP_GOOGLE_API_KEY}}
                 center={center}
                 zoom={6}>        
                 {markers}
                 </GoogleMapReact>
                          
                 : <GoogleMapReact
-                    bootstrapURLKeys={{key:'AIzaSyCBc6pukKhVCqFvdzsU8Mbm6P0mSOTQnjE'}}
+                    bootstrapURLKeys={{key:process.env.REACT_APP_GOOGLE_API_KEY}}
                     center={{lat: panTo.geometry.coordinates[1], lng: panTo.geometry.coordinates[0]}}
                     zoom={12}> 
                     {<LocationMarker 

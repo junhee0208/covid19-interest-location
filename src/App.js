@@ -60,6 +60,17 @@ function App() {
   const twoWeeksbefore = new Date()
   twoWeeksbefore.setDate(twoWeeksbefore.getDate()-13);
   
+
+  function convertDate(originDate){
+    var str = originDate.replace(",", "")
+    str = (str.length < 10 ? "0" +str : str);
+    var dateParts = str.split("/");
+    var date = new Date(dateParts[0])
+    var formattedDate = format(date, 'yyyy/MM/dd')
+    
+    return formattedDate
+  }
+  
   return (
     <div>
       <Header/>
@@ -92,15 +103,7 @@ function App() {
            <div className="autoContainer">
                {options.filter((option) => {
 
-                  function convertDate(originDate){
-                    var str = originDate.replace(",", "")
-                    str = (str.length < 10 ? "0" +str : str);
-                    var dateParts = str.split("/");
-                    var date = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
-                    var formattedDate = format(date, 'yyyy/MM/dd')
-                    
-                    return formattedDate
-                  }
+                  
 
                   if(dateRange.current.length !== 0){
                     var start = convertDate(option.properties.Start.substr(0,10))
